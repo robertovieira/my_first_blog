@@ -24,10 +24,14 @@
 		    <div class="comment">
 		        <div class="date">
 		            {{ comment.created_date }}
-		            {% if not comment.approved_comment %}
-		                <a class="btn btn-default" href="{% url 'blog.views.comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-		                <a class="btn btn-default" href="{% url 'blog.views.comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+		            {% if not comment.approved_comment %}		            	
+		                {% if perms.blog.comment_change %}
+		                	<a class="btn btn-default" href="{% url 'blog.views.comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+		                {% endif %}
 		            {% endif %}
+		            {% if perms.blog.comment_delete %}
+	                	<a class="btn btn-default" href="{% url 'blog.views.comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+	                {% endif %}
 		        </div>
 		        <strong>{{ comment.author }}</strong>
 		        <p>{{ comment.text|linebreaks }}</p>
