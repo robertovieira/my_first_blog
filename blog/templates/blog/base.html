@@ -8,20 +8,54 @@
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
     <body>
-        <div class="page-header">
-            {% if user.is_authenticated %}
-                <a href="{% url 'django.contrib.auth.views.logout' %}" class="top-menu">
-                    <span class="glyphicon glyphicon-log-out"></span>
-                </a>
-                <a href="{% url 'blog.views.post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-                <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>   
-                <!-- <h5>Usuário: {{ user.username }}</h5> -->
-                <!-- <p class="top-menu">Olá {{ user.username }}<small> (<a href="{% url 'django.contrib.auth.views.logout' %}">Log out</a>)</small></p> -->
-            {% else %}
-                <a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"><span class="glyphicon glyphicon-user"></span></a>
-            {% endif %}
-            <h1><a href="/">Aprendendo Python & Django</a></h1>
-        </div>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <!-- The mobile navbar-toggle button can be safely removed since you do not need it in a non-responsive implementation -->
+              <a class="navbar-brand" href="/">Roberto Vieira</a>
+            </div>
+            <!-- Note that the .navbar-collapse and .collapse classes have been removed from the #navbar -->
+            <div id="navbar">
+              <!-- <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Nav header</li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form> -->
+              <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}                    
+                    <li><a href="{% url 'blog.views.post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a></li>
+                    <li><a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a></li>
+                    <li><a href="{% url 'django.contrib.auth.views.logout' %}" class="top-menu">
+                        <span class="glyphicon glyphicon-log-out"></span>
+                    </a></li>
+                    <!-- <h5>Usuário: {{ user.username }}</h5> -->
+                    <!-- <p class="top-menu">Olá {{ user.username }}</p> -->
+                {% else %}
+                    <li><a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"><span class="glyphicon glyphicon-user"></span></a></li>
+                {% endif %}
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </nav>        
         <div class="content container">
             <div class="row">
                 <div class="col-md-8">
